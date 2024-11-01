@@ -1,5 +1,12 @@
+'use client'
+ 
+import { useRouter } from 'next/navigation'
+
 
 const CardSingleGround = () => {
+
+    const router = useRouter()
+
     return (<>
         <div className="card bg-base-100 w-96 shadow-xl">
             <figure>
@@ -10,9 +17,12 @@ const CardSingleGround = () => {
             <div className="card-body">
                 <h2 className="card-title">Dahool Cricket Ground</h2>
                 <p>Available Date: 12-10-2024 - 12-10-2024</p>
+                <p>Location: colombo</p>
                 <p>Rate Per date : 10,000/=</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-warning">Book Now</button>
+                    <button className="btn btn-warning" onClick={() => {
+                        router.push('/ground')
+                    }}>Book Now</button>
                 </div>
             </div>
         </div>

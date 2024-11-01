@@ -9,7 +9,7 @@ export default function Home() {
       <Header />
       <div style={{ backgroundImage: `url(${backImage.src})` }} className="bg-cover bg-center h-[480px] md:h-auto">
         <div className="grid grid-cols-1">
-          <div className="h-60 mt-16 md:mt-36 ml-12 mr-12 md:ml-28 md:mr-28 lg:ml-72 lg:mr-72">
+          <div className="h-60 mt-8 md:mt-32 ml-12 mr-12 md:ml-28 md:mr-28 lg:ml-72 lg:mr-72">
             <div className="glass rounded-lg ">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
                 <div className='p-5 ml-6'>
@@ -41,6 +41,11 @@ export default function Home() {
                   </select>
                 </div>
               </div>
+              <div className='grid grid-cols-1 pb-5'>
+                <div className='justify-self-center'>
+                  <button className="btn btn-warning w-48">Search</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -61,8 +66,6 @@ export default function Home() {
           <CardSingleGround />
         </div>
       </div>
-
-
       <Footer />
     </>
   );
