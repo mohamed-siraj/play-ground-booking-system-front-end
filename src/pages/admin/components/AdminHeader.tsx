@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import AdminAside from './AdminAside';
+import Link from 'next/link';
 
 const AdminHeader = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -14,12 +15,12 @@ const AdminHeader = () => {
         <header>
             <div className="navbar bg-base-300">
                 <div className="flex-1">
-                    <a className="btn btn-ghost text-xl">Admin Dashboard</a> 
+                    <Link href="/admin" className="btn btn-ghost text-xl">Admin Dashboard</Link>
                 </div>
                 <div className="flex-none">
-                <label className="visible md:invisible lg:invisible xl:invisible btn btn-circle swap swap-rotate">
+                    <label className="visible md:invisible lg:invisible xl:invisible btn btn-circle swap swap-rotate">
                         {/* this hidden checkbox controls the state */}
-                        <input type="checkbox" onClick={toggleMenu}/>
+                        <input type="checkbox" onClick={toggleMenu} />
 
                         {/* hamburger icon */}
                         <svg
@@ -62,7 +63,7 @@ const AdminHeader = () => {
                     className={`fixed w-64 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'
                         }`}
                 >
-                    <AdminAside/>
+                    <AdminAside />
                 </div>
             </div>
         </header>

@@ -1,10 +1,17 @@
 
+'use client'
+
+import Link from 'next/link'
 
 const AdminAside = () => {
+
     return (<>
         <ul className="menu bg-[#214157] text-white h-screen text-lg">
             <li>
-                <a>Bookings</a>
+                <Link href="/admin/bookings">Bookings</Link>
+            </li>
+            <li>
+                <a>Grounds</a>
             </li>
             <li>
                 <details open>
@@ -14,9 +21,6 @@ const AdminAside = () => {
                         <li><a>Admin Create</a></li>
                     </ul>
                 </details>
-            </li>
-            <li>
-                <a>Customers</a>
             </li>
             <li>
                 <details open>
@@ -29,9 +33,9 @@ const AdminAside = () => {
             </li>
             <li>
                 <details open>
-                    <summary>Games Type</summary>
+                    <summary>Game Type</summary>
                     <ul>
-                        <li><a>Games Types</a></li>
+                        <li><a>Game Types</a></li>
                         <li><a>Game Type Create</a></li>
                     </ul>
                 </details>
