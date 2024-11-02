@@ -2,11 +2,15 @@ import Footer from '@/components/Footer';
 import backImage from '../assets/pexels-diego-santacruz-252431696-12616082.jpg';
 import Header from "@/components/Header";
 import CardSingleGround from '@/components/CardSingleGround';
+import Head from 'next/head'
 
 export default function Home() {
   return (
     <>
       <Header />
+      <Head>
+        <title>Reserve dot com</title>
+      </Head>
       <div style={{ backgroundImage: `url(${backImage.src})` }} className="bg-cover bg-center h-[480px] md:h-auto">
         <div className="grid grid-cols-1">
           <div className="h-60 mt-8 md:mt-32 ml-12 mr-12 md:ml-28 md:mr-28 lg:ml-72 lg:mr-72">

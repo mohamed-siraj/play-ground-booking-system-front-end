@@ -16,6 +16,9 @@ const AdminAside = () => {
                 </details>
             </li>
             <li>
+                <a>Customers</a>
+            </li>
+            <li>
                 <details open>
                     <summary>Location</summary>
                     <ul>
