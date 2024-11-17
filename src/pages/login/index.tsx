@@ -1,5 +1,8 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import Link from 'next/link';
+import Header from '@/components/Header';
+import Head from 'next/head';
 const Login = () => {
 
     const validationSchema = Yup.object({
@@ -9,12 +12,16 @@ const Login = () => {
     });
 
     return (<>
+        <Header />
+        <Head>
+            <title>Log-in</title>
+        </Head>
         <div className="card lg:card-side w-full rounded-none">
             <figure className="hidden md:block lg:w-1/2">
                 <img src="https://media.istockphoto.com/id/612860162/photo/american-soccer-stadium-3d-rendering.jpg?s=2048x2048&w=is&k=20&c=EY_ZxPRze6z6elUyUL0au4TBkvrBYbZCxpbS8U-5pcc=" alt="Random image" className="object-cover w-full h-screen" />
             </figure>
             <div className="card-body lg:w-1/2">
-                <h2 className="card-title text-2xl font-bold mb-6">Login</h2>
+                <h2 className="card-title text-2xl font-bold mb-6">Log-in</h2>
                 <Formik
                     initialValues={{ email: '', password: '', user_type: '' }}
                     validationSchema={validationSchema}
@@ -85,7 +92,7 @@ const Login = () => {
                 <div className="divider">OR</div>
                 <div className="text-center">
                     <p>Don&apos;t have an account?</p>
-                    <a href="#" className="link link-warning">Sign up now</a>
+                    <Link className="link link-warning" href="/signup">Sign up now</Link>
                 </div>
             </div>
         </div>

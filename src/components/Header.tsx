@@ -1,3 +1,4 @@
+import Link from 'next/link';
 
 const Header = () => {
     return (<>
@@ -14,7 +15,7 @@ const Header = () => {
                                 <ul className="bg-base-100 rounded-t-none p-2">
                                     <li><a>Dashboard</a></li>
                                     <li><a>Logout</a></li>
-                                    <li><a>Login</a></li>
+                                    <li><Link href="/login">Log-in</Link></li>
                                 </ul>
                             </details>
                         </li>
