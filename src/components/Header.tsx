@@ -14,6 +14,7 @@ const Header = () => {
                                 <ul className="bg-base-100 rounded-t-none p-2">
                                     <li><a>Dashboard</a></li>
                                     <li><a>Logout</a></li>
+                                    <li><a>Login</a></li>
                                 </ul>
                             </details>
                         </li>
@@ -24,5 +25,4 @@ const Header = () => {
 
     </>)
 }
-// rgb(27, 100, 18)
 export default Header;
