@@ -17,8 +17,8 @@ const AdminAside = () => {
                 <details open>
                     <summary>Ground Admin</summary>
                     <ul>
-                        <li><a>Admins</a></li>
-                        <li><a>Admin Create</a></li>
+                        <li><Link href="/admin/ground-admin">Admins</Link></li>
+                        <li><Link href="/admin/ground-admin/create">Admin Create</Link></li>
                     </ul>
                 </details>
             </li>
@@ -26,8 +26,8 @@ const AdminAside = () => {
                 <details open>
                     <summary>Location</summary>
                     <ul>
-                        <li><a>Locations</a></li>
-                        <li><a>Location Create</a></li>
+                        <li><Link href="/admin/location">Locations</Link></li>
+                        <li><Link href="/admin/location/create">Location Create</Link></li>
                     </ul>
                 </details>
             </li>
@@ -35,8 +35,8 @@ const AdminAside = () => {
                 <details open>
                     <summary>Game Type</summary>
                     <ul>
-                        <li><a>Game Types</a></li>
-                        <li><a>Game Type Create</a></li>
+                        <li><Link href="/admin/game-type">Game Types</Link></li>
+                        <li><Link href="/admin/game-type/create">Game Type Create</Link></li>
                     </ul>
                 </details>
             </li>
