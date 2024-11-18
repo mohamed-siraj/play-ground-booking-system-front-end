@@ -4,7 +4,6 @@ import { FiEdit } from "react-icons/fi";
 import { useRouter } from 'next/router';
 import { MdOutlineDeleteForever } from "react-icons/md";
 import { DeleteGameType } from "@/axios/useApi";
-
 type ChildComponentProps = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     data: any[];
@@ -12,14 +11,14 @@ type ChildComponentProps = {
 
 const GameType = ({ data }: ChildComponentProps) => {
     const router = useRouter();
-
+    
     const edit = (id: number) => {
         router.push(`/admin/game-type/edit/${id}`); //
     };
 
-    const deleteData = (id: number) => {
-        DeleteGameType({id: id})
-        router.push(`/admin/game-type`); //
+    const deleteData = async (id: number) => {
+        await DeleteGameType(id)
+        window.location.reload();
     };
 
     return (<>

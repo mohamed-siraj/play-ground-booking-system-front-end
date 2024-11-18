@@ -4,18 +4,22 @@ import Head from "next/head";
 import AdminAside from "../components/AdminAside";
 import AdminFooter from "../components/AdminFooter";
 import AdminHeader from "../components/AdminHeader";
-import { useState } from 'react';
+import { useEffect } from 'react';
 import Link from 'next/link';
 import LocationList from "@/components/location/Location";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/state/store";
+import { setLocation } from "@/state/slices/LocationReducer";
+import { GetAllLocation } from "@/axios/useApi";
 
 const AdminLocation = () => {
 
-    const [isOpen, setIsOpen] = useState(false);
+    const dispatch = useDispatch();
+    const { data } = useSelector((state: RootState) => state.location);
 
-    const toggleModal = () => {
-        setIsOpen(!isOpen)
-    };
-
+    useEffect(() => {
+        GetAllLocation().then((data) => dispatch(setLocation(data.success)));
+    },[dispatch])
 
     return (<>
         <AdminHeader />
@@ -35,7 +39,7 @@ const AdminLocation = () => {
                     <div className="text-right"><Link className="link link-warning" href="/admin/location/create"><button className="btn btn-warning mb-3">Create Location</button></Link></div>
                     <div className="bg-gray-300 rounded-md">
                         <div className="overflow-x-auto">
-                            <LocationList toggleModal={toggleModal}/>
+                            <LocationList data={data}/>
                         </div>
                     </div>
                     {/* <div className="grid justify-items-end mt-2">

@@ -15,6 +15,7 @@ const AdminGameTypeEdit = () => {
         type: '',
       });
     const router = useRouter();
+    
     const { id } = router.query; //
 
     const validationSchema = Yup.object({

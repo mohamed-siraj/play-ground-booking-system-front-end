@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import gameTypeReducer from './slices/GameTypeReducer';
+import locationReducer from './slices/LocationReducer';
 
 
 export const store = configureStore({
     reducer: {
-        gameType: gameTypeReducer
+        gameType: gameTypeReducer,
+        location: locationReducer
     }
 });
 

@@ -6,7 +6,11 @@ import AdminAside from "../../components/AdminAside";
 import AdminFooter from "../../components/AdminFooter";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { useRouter } from 'next/router';
+import { CreateLocation } from "@/axios/useApi";
 const AdminLocationCreate = () => {
+
+    const router = useRouter();
 
     const validationSchema = Yup.object({
         name: Yup.string().required('name is required'),
@@ -34,10 +38,11 @@ const AdminLocationCreate = () => {
                                     initialValues={{ name: '' }}
                                     validationSchema={validationSchema}
                                     onSubmit={(values, { setSubmitting }) => {
+                                        CreateLocation(values);
                                         setTimeout(() => {
-                                            alert(JSON.stringify(values, null, 2));
                                             setSubmitting(false);
                                         }, 400);
+                                        router.push('/admin/location'); //
                                     }}
                                 >
                                     {({
@@ -56,7 +61,7 @@ const AdminLocationCreate = () => {
                                                 </label>
                                                 <label className="input input-bordered flex items-center gap-2">
                                                     <input className="grow" placeholder="Enter Name"
-                                                        name="type"
+                                                        name="name"
                                                         onChange={handleChange}
                                                         onBlur={handleBlur}
                                                         value={values.name} />
