@@ -1,9 +1,34 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AdminAside from './GroundAdminAside';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const GroundAdminHeader = () => {
+
+    const [name, setName] = useState(null);
+
+    useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const na: any = localStorage.getItem('admin_name');
+
+        if (na) {
+            setName(na);
+        }
+
+    }, [])
+
+
+    const router = useRouter();
+
+    useEffect(() => {
+        const admin_type = localStorage.getItem('admin_type');
+        if (admin_type === 'SUPER_ADMIN') {
+            router.push('/admin'); //
+        }
+    }, [router])
+
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -14,12 +39,12 @@ const GroundAdminHeader = () => {
         <header>
             <div className="navbar bg-base-300">
                 <div className="flex-1">
-                    <a className="btn btn-ghost text-xl">Ground Admin Dashboard</a> 
+                    <a className="btn btn-ghost text-xl">Ground Admin Dashboard</a>
                 </div>
                 <div className="flex-none">
-                <label className="visible md:invisible lg:invisible xl:invisible btn btn-circle swap swap-rotate">
+                    <label className="visible md:invisible lg:invisible xl:invisible btn btn-circle swap swap-rotate">
                         {/* this hidden checkbox controls the state */}
-                        <input type="checkbox" onClick={toggleMenu}/>
+                        <input type="checkbox" onClick={toggleMenu} />
 
                         {/* hamburger icon */}
                         <svg
@@ -45,10 +70,13 @@ const GroundAdminHeader = () => {
                     <ul className="menu menu-horizontal px-1">
                         <li>
                             <details>
-                                <summary>Mohamed Siraj</summary>
+                                <summary>{name ? name : 'Guest Account'}</summary>
                                 <ul className="bg-base-100 rounded-t-none p-2">
-                                    <li><a>Home Screen</a></li>
-                                    <li><a>Logout</a></li>
+                                    <li><Link href="/ground-admin">Home Screen</Link></li>
+                                    <li><a onClick={() => {
+                                        localStorage.clear();
+                                        router.push('/'); //
+                                    }}>Logout</a></li>
                                 </ul>
                             </details>
                         </li>
@@ -62,7 +90,7 @@ const GroundAdminHeader = () => {
                     className={`fixed w-64 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'
                         }`}
                 >
-                    <AdminAside/>
+                    <AdminAside />
                 </div>
             </div>
         </header>

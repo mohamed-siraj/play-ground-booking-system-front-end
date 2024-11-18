@@ -5,7 +5,6 @@ import AdminAside from "../components/AdminAside";
 import AdminFooter from "../components/AdminFooter";
 import AdminHeader from "../components/AdminHeader";
 import { useEffect } from 'react';
-import Link from 'next/link';
 import GroundAdmin from "@/components/ground-admin/GroundAdmin";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
@@ -18,13 +17,13 @@ const AdminGroundAdmin = () => {
     const { data } = useSelector((state: RootState) => state.admin);
 
     useEffect(() => {
-        GetAllUsers('GROUND_ADMIN').then((data) => dispatch(setAdmin(data.success)));
+        GetAllUsers('CUSTOMER').then((data) => dispatch(setAdmin(data.success)));
     },[dispatch])
 
     return (<>
         <AdminHeader />
         <Head>
-            <title>Admin</title>
+            <title>Customers</title>
         </Head>
         <div className="flex flex-row">
             <div className="hidden md:basis-[300px] md:block">
@@ -36,7 +35,6 @@ const AdminGroundAdmin = () => {
 
             <div className="basis-full md:basis-full ">
                 <div className="container mx-auto px-4 mt-10">
-                    <div className="text-right"><Link className="link link-warning" href="/admin/ground-admin/create"><button className="btn btn-warning mb-3">Create Admin</button></Link></div>
                     <div className="bg-gray-300 rounded-md">
                         <div className="overflow-x-auto">
                             <GroundAdmin data={data}/>

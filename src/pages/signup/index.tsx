@@ -3,7 +3,12 @@ import * as Yup from 'yup';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { CreateUsers } from '@/axios/useApi';
+
 const Signup = () => {
+
+    const router = useRouter();
 
     const validationSchema = Yup.object({
         email: Yup.string().email('Invalid email format').required('Email is required'),
@@ -27,10 +32,11 @@ const Signup = () => {
                     initialValues={{ email: '', password: '', user_type: '', name: '', password_confirmation: '', phone_number: '', address: '' }}
                     validationSchema={validationSchema}
                     onSubmit={(values, { setSubmitting }) => {
+                        CreateUsers(values);
                         setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
                             setSubmitting(false);
                         }, 400);
+                        router.push('/'); //
                     }}
                 >
                     {({
@@ -51,8 +57,8 @@ const Signup = () => {
                                     onBlur={handleBlur}
                                     value={values.user_type}>
                                     <option disabled selected value={``}>Select User Type</option>
-                                    <option value={`SUPER_ADMIN`}>Super Admin</option>
-                                    <option value={`GROUND_ADMIN`}>Ground Admin</option>
+                                    {/* <option value={`SUPER_ADMIN`}>Super Admin</option> */}
+                                    {/* <option value={`GROUND_ADMIN`}>Ground Admin</option> */}
                                     <option value={`CUSTOMER`}>Customer</option>
                                 </select>
                                 {errors.user_type && <div style={{ color: 'red' }}>{errors.user_type}</div>}

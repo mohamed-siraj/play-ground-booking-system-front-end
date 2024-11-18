@@ -23,6 +23,9 @@ const AdminAside = () => {
                 </details>
             </li>
             <li>
+            <Link href="/admin/customers">Customers</Link>
+            </li>
+            <li>
                 <details open>
                     <summary>Location</summary>
                     <ul>

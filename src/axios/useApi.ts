@@ -2,6 +2,16 @@
 import axiosInstance from './axios';
 
 /**
+ * 
+ * authentication
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const login = async (payload: any) => {
+  const response = await axiosInstance.post('/login', payload);
+  return response.data;
+};
+
+/**
  * game type
  */
 export const GetAllGameType = async () => {
@@ -69,7 +79,7 @@ export const DeleteLocation = async (id: any) => {
  * admin
  */
 export const GetAllUsers = async (userType: string) => {
-  const response = await axiosInstance.get('/users?userType='+userType);
+  const response = await axiosInstance.get('/users?user_type='+userType);
   return response.data;
 };
 
@@ -94,5 +104,37 @@ export const UpdateUsers = async (payload: any) => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const DeleteUsers = async (id: any) => {
   const response = await axiosInstance.delete('/users/'+id);
+  return response.data;
+};
+
+/**
+ * Ground
+ */
+export const GetAllGround = async () => {
+  const response = await axiosInstance.get('/grounds');
+  return response.data;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const GetByIdGround = async (id: any) => {
+  const response = await axiosInstance.get('/grounds/'+id);
+  return response.data;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const CreateGround = async (payload: any) => {
+  const response = await axiosInstance.post('/grounds', payload);
+  return response.data;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const UpdateGround = async (payload: any) => {
+  const response = await axiosInstance.patch('/grounds', payload);
+  return response.data;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const DeleteGround = async (id: any) => {
+  const response = await axiosInstance.delete('/grounds/'+id);
   return response.data;
 };

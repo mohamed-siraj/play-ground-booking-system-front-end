@@ -3,7 +3,22 @@ import * as Yup from 'yup';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { login } from '@/axios/useApi';
+import { useEffect } from 'react';
 const Login = () => {
+
+    const router = useRouter();
+
+    useEffect(() => {
+        const admin_type = localStorage.getItem('admin_type');
+        if(admin_type === 'SUPER_ADMIN'){
+            router.push('/admin'); //
+        }
+        if(admin_type === 'GROUND_ADMIN'){
+            router.push('/ground-admin'); //
+        }
+    },[router])
 
     const validationSchema = Yup.object({
         email: Yup.string().email('Invalid email format').required('Email is required'),
@@ -26,8 +41,20 @@ const Login = () => {
                     initialValues={{ email: '', password: '', user_type: '' }}
                     validationSchema={validationSchema}
                     onSubmit={(values, { setSubmitting }) => {
+                        login(values).then((value)=> {
+                            localStorage.setItem('admin_type', values.user_type);
+                            localStorage.setItem('admin_name', value.name);
+                            if(values.user_type === 'SUPER_ADMIN'){
+                                router.push('/admin'); //
+                            }
+                            if(values.user_type === 'GROUND_ADMIN'){
+                                router.push('/ground-admin'); //
+                            }
+                            // if(values.user_type === 'CUSTOMER'){
+                            //     router.push('/admin'); //
+                            // }
+                        });
                         setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
                             setSubmitting(false);
                         }, 400);
                     }}

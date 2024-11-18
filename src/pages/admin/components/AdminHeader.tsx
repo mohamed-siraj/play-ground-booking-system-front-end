@@ -1,10 +1,34 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AdminAside from './AdminAside';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const AdminHeader = () => {
+
+    const [name, setName] = useState(null);
+
+    useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const na: any = localStorage.getItem('admin_name');
+
+        if (na) {
+            setName(na);
+        }
+
+    }, [])
+
+
+    const router = useRouter();
+
+    useEffect(() => {
+        const admin_type = localStorage.getItem('admin_type');
+        if(admin_type === 'GROUND_ADMIN'){
+            router.push('/ground-admin'); //
+        }
+    },[router])
+
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -46,10 +70,13 @@ const AdminHeader = () => {
                     <ul className="menu menu-horizontal px-1">
                         <li>
                             <details>
-                                <summary>Mohamed Siraj</summary>
+                            <summary>{name ? name : 'Guest Account'}</summary>
                                 <ul className="bg-base-100 rounded-t-none p-2">
-                                    <li><a>Home Screen</a></li>
-                                    <li><a>Logout</a></li>
+                                    <li><Link href="/admin">Home Screen</Link></li>
+                                    <li><a onClick={() => {
+                                        localStorage.clear();
+                                        router.push('/'); //
+                                    }}>Logout</a></li>
                                 </ul>
                             </details>
                         </li>
