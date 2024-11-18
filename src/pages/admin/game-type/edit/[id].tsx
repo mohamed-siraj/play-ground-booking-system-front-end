@@ -87,7 +87,7 @@ const AdminGameTypeEdit = () => {
                                                 {errors.type && <div style={{ color: 'red' }}>{errors.type}</div>}
                                             </div>
                                             <div className="form-control mt-6">
-                                                <button className="btn btn-warning" disabled={isSubmitting}>Edit</button>
+                                                <button className="btn btn-warning" disabled={isSubmitting}>Update</button>
                                             </div>
                                         </form>
                                     )}

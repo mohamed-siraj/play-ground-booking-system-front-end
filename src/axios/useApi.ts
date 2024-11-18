@@ -64,3 +64,35 @@ export const DeleteLocation = async (id: any) => {
   const response = await axiosInstance.delete('/locations/'+id);
   return response.data;
 };
+
+/**
+ * admin
+ */
+export const GetAllUsers = async (userType: string) => {
+  const response = await axiosInstance.get('/users?userType='+userType);
+  return response.data;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const GetByIdUsers = async (id: any) => {
+  const response = await axiosInstance.get('/users/'+id);
+  return response.data;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const CreateUsers = async (payload: any) => {
+  const response = await axiosInstance.post('/registration', payload);
+  return response.data;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const UpdateUsers = async (payload: any) => {
+  const response = await axiosInstance.patch('/users', payload);
+  return response.data;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const DeleteUsers = async (id: any) => {
+  const response = await axiosInstance.delete('/users/'+id);
+  return response.data;
+};

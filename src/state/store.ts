@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import gameTypeReducer from './slices/GameTypeReducer';
 import locationReducer from './slices/LocationReducer';
+import adminReducer from './slices/AdminReducer';
 
 
 export const store = configureStore({
     reducer: {
         gameType: gameTypeReducer,
-        location: locationReducer
+        location: locationReducer,
+        admin: adminReducer
     }
 });
 

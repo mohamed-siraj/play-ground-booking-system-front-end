@@ -40,7 +40,7 @@ axiosInstance.interceptors.response.use(
           break;
         case 500:
           // Handle Internal Server Error
-          alert('Server Error: Please try again later.');
+          alert('This data has been mapped');
           break;
         default:
           alert('An unexpected error occurred.');

@@ -7,25 +7,43 @@ import AdminFooter from "../../components/AdminFooter";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useRouter } from 'next/router';
-import { CreateUsers } from "@/axios/useApi";
-const AdminGameTypeCreate = () => {
+import { GetByIdUsers, UpdateUsers } from "@/axios/useApi";
+import { useEffect, useState } from "react";
+const AdminGameTypeEdit = () => {
+
+    const [initialValues, setInitialValues] = useState({ 
+        user_type: '', 
+        name: '', 
+        phone_number: '', 
+        address: '' 
+    });
 
     const router = useRouter();
+    
+    const { id } = router.query; //
 
     const validationSchema = Yup.object({
-        email: Yup.string().email('Invalid email format').required('Email is required'),
         name: Yup.string().required('Name is required'),
-        password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
-        password_confirmation: Yup.string().oneOf([Yup.ref('password')], 'Passwords must match').required('Confirm password is required'),
         user_type: Yup.string().required('User type is required'),
         phone_number: Yup.string().required('Phone number is required'),
         address: Yup.string().required('Address is required'),
     });
 
+    useEffect(() => {
+        GetByIdUsers(id).then((data) => {
+            setInitialValues({
+                user_type: data?.success?.user_type,
+                name: data?.success?.name,
+                phone_number: data?.success?.phone_number,
+                address: data?.success?.address,
+              });
+        });
+    },[id])
+
     return (<>
         <AdminHeader />
         <Head>
-            <title>Admin Ground Create</title>
+            <title>Admin Ground Edit</title>
         </Head>
         <div className="flex flex-row">
             <div className="hidden md:basis-[300px] md:block">
@@ -39,17 +57,19 @@ const AdminGameTypeCreate = () => {
                     <div className="bg-gray-300 rounded-md">
                         <div className="overflow-x-auto">
                             <div className="card-body lg:w-1/2">
-                                <h2 className="card-title text-2xl font-bold mb-6">Ground Admin Create</h2>
+                                <h2 className="card-title text-2xl font-bold mb-6">Ground Admin Edit</h2>
                                 <Formik
                                     enableReinitialize={true}
-                                    initialValues={{ email: '', password: '', user_type: '', name: '', password_confirmation: '', phone_number: '', address: '' }}
+                                    initialValues={initialValues}
                                     validationSchema={validationSchema}
                                     onSubmit={(values, { setSubmitting }) => {
-                                        CreateUsers(values);
+                                        const data = Object.assign(values, {id : id});
+                                        UpdateUsers(data)
                                         setTimeout(() => {
                                             setSubmitting(false);
+                                            router.push('/admin/ground-admin'); //
                                         }, 400);
-                                        router.push('/admin/ground-admin'); //
+
                                     }}
                                 >
                                     {({
@@ -87,43 +107,6 @@ const AdminGameTypeCreate = () => {
                                                 </label>
                                                 {errors.name && <div style={{ color: 'red' }}>{errors.name}</div>}
                                             </div>
-                                            <div className="form-control">
-                                                <label className="label">
-                                                    <span className="label-text">Email</span>
-                                                </label>
-                                                <label className="input input-bordered flex items-center gap-2">
-                                                    <input name="email" type="email" className="grow" placeholder="email@example.com" onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.email} />
-                                                </label>
-                                                {errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
-                                            </div>
-                                            <div className="form-control mt-4">
-                                                <label className="label">
-                                                    <span className="label-text">Password</span>
-                                                </label>
-                                                <label className="input input-bordered flex items-center gap-2">
-                                                    <input className="grow" placeholder="Enter password" type="password"
-                                                        name="password"
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.password} />
-                                                </label>
-                                                {errors.password && <div style={{ color: 'red' }}>{errors.password}</div>}
-                                            </div>
-                                            <div className="form-control mt-4">
-                                                <label className="label">
-                                                    <span className="label-text">Confirm Password</span>
-                                                </label>
-                                                <label className="input input-bordered flex items-center gap-2">
-                                                    <input className="grow" placeholder="Enter Confirm password" type="password"
-                                                        name="password_confirmation"
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.password_confirmation} />
-                                                </label>
-                                                {errors.password_confirmation && <div style={{ color: 'red' }}>{errors.password_confirmation}</div>}
-                                            </div>
                                             <div className="form-control mt-4">
                                                 <label className="label">
                                                     <span className="label-text">Phone Number</span>
@@ -151,7 +134,7 @@ const AdminGameTypeCreate = () => {
                                                 {errors.address && <div style={{ color: 'red' }}>{errors.address}</div>}
                                             </div>
                                             <div className="form-control mt-6">
-                                                <button className="btn btn-warning" disabled={isSubmitting}>Create</button>
+                                                <button className="btn btn-warning" disabled={isSubmitting}>Update</button>
                                             </div>
                                         </form>
                                     )}
@@ -173,4 +156,4 @@ const AdminGameTypeCreate = () => {
     </>);
 };
 
-export default AdminGameTypeCreate;
+export default AdminGameTypeEdit;
