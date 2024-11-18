@@ -4,19 +4,21 @@ import Head from "next/head";
 import AdminAside from "../components/AdminAside";
 import AdminFooter from "../components/AdminFooter";
 import AdminHeader from "../components/AdminHeader";
-import { useState } from 'react';
+import { useEffect } from 'react';
 import Link from 'next/link';
 import GameType from "@/components/game-type/GameType";
+import { useDispatch, useSelector } from "react-redux";
+import { GetAllGameType } from "@/axios/useApi";
+import { setGameType } from "@/state/slices/GameTypeReducer";
+import { RootState } from "@/state/store";
 
 const AdminGameType = () => {
+    const dispatch = useDispatch();
+    const { data } = useSelector((state: RootState) => state.gameType);
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggleModal = () => {
-        setIsOpen(!isOpen)
-    };
-
-
+    useEffect(() => {
+        GetAllGameType().then((data) => dispatch(setGameType(data.success)));
+    },[dispatch])
     return (<>
         <AdminHeader />
         <Head>
@@ -35,7 +37,7 @@ const AdminGameType = () => {
                     <div className="text-right"><Link className="link link-warning" href="/admin/game-type/create"><button className="btn btn-warning mb-3">Create Game Type</button></Link></div>
                     <div className="bg-gray-300 rounded-md">
                         <div className="overflow-x-auto">
-                            <GameType toggleModal={toggleModal}/>
+                            <GameType data={data}/>
                         </div>
                     </div>
                     {/* <div className="grid justify-items-end mt-2">

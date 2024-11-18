@@ -6,7 +6,11 @@ import AdminAside from "../../components/AdminAside";
 import AdminFooter from "../../components/AdminFooter";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { CreateGameType } from "@/axios/useApi";
+import { useRouter } from 'next/router';
 const AdminGameTypeCreate = () => {
+
+    const router = useRouter();
 
     const validationSchema = Yup.object({
         type: Yup.string().required('Type is required'),
@@ -34,10 +38,11 @@ const AdminGameTypeCreate = () => {
                                     initialValues={{ type: '' }}
                                     validationSchema={validationSchema}
                                     onSubmit={(values, { setSubmitting }) => {
+                                        CreateGameType(values);
                                         setTimeout(() => {
-                                            alert(JSON.stringify(values, null, 2));
                                             setSubmitting(false);
                                         }, 400);
+                                        router.push('/admin/game-type'); //
                                     }}
                                 >
                                     {({

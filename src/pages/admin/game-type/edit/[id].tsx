@@ -6,16 +6,35 @@ import AdminAside from "../../components/AdminAside";
 import AdminFooter from "../../components/AdminFooter";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from "react";
+import { GetByIdGameType, UpdateGameType } from "@/axios/useApi";
 const AdminGameTypeEdit = () => {
+
+    const [initialValues, setInitialValues] = useState({
+        type: '',
+      });
+    const router = useRouter();
+    const { id } = router.query; //
 
     const validationSchema = Yup.object({
         type: Yup.string().required('Type is required'),
     });
 
+    useEffect(() => {
+        GetByIdGameType(id).then((data) => {
+            console.log(data.success);
+            setInitialValues({
+                type: data?.success?.type,
+              });
+        });
+        
+    },[id])
+
     return (<>
         <AdminHeader />
         <Head>
-            <title>Admin Game Type Create</title>
+            <title>Admin Game Type Edit</title>
         </Head>
         <div className="flex flex-row">
             <div className="hidden md:basis-[300px] md:block">
@@ -29,14 +48,17 @@ const AdminGameTypeEdit = () => {
                     <div className="bg-gray-300 rounded-md">
                         <div className="overflow-x-auto">
                             <div className="card-body lg:w-1/2">
-                                <h2 className="card-title text-2xl font-bold mb-6">Game Type Create</h2>
+                                <h2 className="card-title text-2xl font-bold mb-6">Game Type Edit</h2>
                                 <Formik
-                                    initialValues={{ type: '' }}
+                                    enableReinitialize={true}
+                                    initialValues={initialValues}
                                     validationSchema={validationSchema}
                                     onSubmit={(values, { setSubmitting }) => {
+                                        const data = Object.assign(values, {id : id});
+                                        UpdateGameType(data)
                                         setTimeout(() => {
-                                            alert(JSON.stringify(values, null, 2));
                                             setSubmitting(false);
+                                            router.push('/admin/game-type'); //
                                         }, 400);
                                     }}
                                 >
