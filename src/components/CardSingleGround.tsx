@@ -2,8 +2,12 @@
  
 import { useRouter } from 'next/navigation'
 
+type ChildComponentProps = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data: any; // Define the type for the function prop
+};
 
-const CardSingleGround = () => {
+const CardSingleGround = ({ data }: ChildComponentProps) => {
 
     const router = useRouter()
 
@@ -11,17 +15,18 @@ const CardSingleGround = () => {
         <div className="card bg-base-100 w-96 shadow-xl">
             <figure>
                 <img
-                    src="https://media.istockphoto.com/id/642535186/photo/cricket-stadium.webp?a=1&b=1&s=612x612&w=0&k=20&c=zWYPTdgjGw7si1Ky7DsOcMYCFyKusGOD3J4IxjOgAKc="
-                    alt="Shoes" />
+                    className='h-44'
+                    src={data.image_1}
+                    alt={data.image_1} />
             </figure>
             <div className="card-body">
-                <h2 className="card-title">Dahool Cricket Ground</h2>
-                <p>Available Date: 12-10-2024 - 12-10-2024</p>
-                <p>Location: colombo</p>
-                <p>Rate Per date : 10,000/=</p>
+                <h2 className="card-title">{data?.name}</h2>
+                <p><span className='font-bold'>Available Date:</span> {data?.available_day_from} - {data?.available_day_to}</p>
+                <p><span className='font-bold'> Location:</span> {data.location_id?.name}</p>
+                <p><span className='font-bold'> Rate Per Day:</span> Rs. {data.per_day_price}</p>
                 <div className="card-actions justify-end">
                     <button className="btn btn-warning" onClick={() => {
-                        router.push('/ground')
+                        router.push('/ground/'+data.id)
                     }}>Book Now</button>
                 </div>
             </div>

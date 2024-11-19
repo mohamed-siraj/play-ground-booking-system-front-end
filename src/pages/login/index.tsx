@@ -51,9 +51,9 @@ const Login = () => {
                             if(values.user_type === 'GROUND_ADMIN'){
                                 router.push('/ground-admin'); //
                             }
-                            // if(values.user_type === 'CUSTOMER'){
-                            //     router.push('/admin'); //
-                            // }
+                            if(values.user_type === 'CUSTOMER'){
+                                router.push('/'); //
+                            }
                         });
                         setTimeout(() => {
                             setSubmitting(false);

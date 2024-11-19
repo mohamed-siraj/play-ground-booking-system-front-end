@@ -3,6 +3,7 @@ import gameTypeReducer from './slices/GameTypeReducer';
 import locationReducer from './slices/LocationReducer';
 import adminReducer from './slices/AdminReducer';
 import groundReducer from './slices/GroundReducer';
+import availabilityReducer from './slices/AvailabilityReducer';
 
 
 export const store = configureStore({
@@ -10,7 +11,8 @@ export const store = configureStore({
         gameType: gameTypeReducer,
         location: locationReducer,
         admin: adminReducer,
-        ground: groundReducer
+        ground: groundReducer,
+        availability: availabilityReducer
     }
 });
 

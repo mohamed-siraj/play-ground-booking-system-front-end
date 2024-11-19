@@ -147,3 +147,13 @@ export const DeleteGround = async (id: any) => {
   return response.data;
 };
 
+
+/**
+ * availability
+ */
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const availability = async (payload: any)  => {
+  const response = await axiosInstance.post('/availability', payload);
+  return response.data;
+};

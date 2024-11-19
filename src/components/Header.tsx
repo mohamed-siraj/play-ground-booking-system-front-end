@@ -38,7 +38,7 @@ const Header = () => {
         <header>
             <div className="navbar bg-base-300">
                 <div className="flex-1">
-                    <a className="btn btn-ghost text-xl">Reserve dot com</a>
+                <Link href="/" className="btn btn-ghost text-xl">Reserve dot com</Link>
                 </div>
                 <div className="flex-none">
                     <ul className="menu menu-horizontal px-1">
