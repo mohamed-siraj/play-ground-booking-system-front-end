@@ -6,11 +6,11 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { GetAllGround } from "@/axios/useApi";
-import GroundAdminHeader from "../components/GroundAdminHeader";
-import GroundAdminAside from "../components/GroundAdminAside";
-import GroundAdminFooter from "../components/GroundAdminFooter";
 import Grounds from "@/components/ground/Ground";
 import { setGround } from "@/state/slices/GroundReducer";
+import AdminFooter from "../components/AdminFooter";
+import AdminAside from "../components/AdminAside";
+import AdminHeader from "../components/AdminHeader";
 
 const Ground = () => {
 
@@ -18,20 +18,18 @@ const Ground = () => {
     const { data } = useSelector((state: RootState) => state.ground);
 
     useEffect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const user_id: any = localStorage.getItem('user_id');
-        GetAllGround(user_id).then((data) => dispatch(setGround(data.success)));
+        GetAllGround('').then((data) => dispatch(setGround(data.success)));
     }, [dispatch])
 
     return (<>
-        <GroundAdminHeader />
+        <AdminHeader />
         <Head>
             <title>Grounds</title>
         </Head>
         <div className="flex flex-row">
             <div className="hidden md:basis-[300px] md:block">
                 <aside>
-                    <GroundAdminAside />
+                <AdminAside />
                 </aside>
             </div>
 
@@ -53,7 +51,7 @@ const Ground = () => {
                 </div>
             </div>
         </div>
-        <GroundAdminFooter />
+        <AdminFooter />
     </>);
 };
 

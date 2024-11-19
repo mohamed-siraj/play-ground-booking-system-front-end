@@ -1,4 +1,4 @@
-
+import Link from 'next/link'
 
 const GroundAdminAside = () => {
     return (<>
@@ -10,8 +10,8 @@ const GroundAdminAside = () => {
                 <details open>
                     <summary>Grounds</summary>
                     <ul>
-                        <li><a>Grounds</a></li>
-                        <li><a>Ground Create</a></li>
+                        <li><Link href="/ground-admin/ground">Grounds</Link></li>
+                        <li><Link href="/ground-admin/ground/create">Ground Create</Link></li>
                     </ul>
                 </details>
             </li>

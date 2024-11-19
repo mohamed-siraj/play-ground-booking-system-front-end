@@ -10,9 +10,7 @@ const AdminAside = () => {
             <li>
                 <Link href="/admin/bookings">Bookings</Link>
             </li>
-            <li>
-                <a>Grounds</a>
-            </li>
+            <li><Link href="/admin/ground">Grounds</Link></li>
             <li>
                 <details open>
                     <summary>Ground Admin</summary>

@@ -44,6 +44,7 @@ const Login = () => {
                         login(values).then((value)=> {
                             localStorage.setItem('admin_type', values.user_type);
                             localStorage.setItem('admin_name', value.name);
+                            localStorage.setItem('user_id', value.id);
                             if(values.user_type === 'SUPER_ADMIN'){
                                 router.push('/admin'); //
                             }

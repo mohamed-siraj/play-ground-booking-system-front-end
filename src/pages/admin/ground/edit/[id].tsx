@@ -1,23 +1,28 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import Head from "next/head";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useRouter } from 'next/router';
-import { CreateGround, GetAllGameType, GetAllLocation } from "@/axios/useApi";
-import GroundAdminHeader from "../../components/GroundAdminHeader";
-import GroundAdminAside from "../../components/GroundAdminAside";
-import GroundAdminFooter from "../../components/GroundAdminFooter";
+import { GetAllGameType, GetAllLocation, GetByIdGround, UpdateGround } from "@/axios/useApi";
 import { useEffect, useState } from "react";
-const AdminGameTypeCreate = () => {
+import AdminFooter from "../../components/AdminFooter";
+import AdminHeader from "../../components/AdminHeader";
+import AdminAside from "../../components/AdminAside";
+const AdminGameTypeEdit = () => {
+    const router = useRouter();
+
+    const { id } = router.query; //
 
     const [file, setFile] = useState<File | null>(null);
 
+    const [imageUrl, setImageUrl] = useState('');
+
     const [gameTypes, setGameTypes] = useState<[]>();
     const [locations, setLocation] = useState<[]>();
-    const [initialValues, setInitialValues] = useState({ image: null, name: '', game_type_id: '', location_id: '', location_address: '', level: '', surrounding: '', per_day_price: '', available_day_from: '', available_day_to: '', description: '', ground_admin_id: '' });
+    const [initialValues, setInitialValues] = useState({ id: id, image: null, name: '', game_type_id: '', location_id: '', location_address: '', level: '', surrounding: '', per_day_price: '', available_day_from: '', available_day_to: '', description: '', ground_admin_id: '' });
 
-    const router = useRouter();
 
     useEffect(() => {
         GetAllGameType().then((data) => setGameTypes(data.success));
@@ -25,10 +30,15 @@ const AdminGameTypeCreate = () => {
 
         const storedToken = localStorage.getItem('user_id');
         if(storedToken){
-            setInitialValues({ image: null, name: '', game_type_id: '', location_id: '', location_address: '', level: '', surrounding: '', per_day_price: '', available_day_from: '', available_day_to: '', description: '', ground_admin_id: storedToken })
+
+            GetByIdGround(id).then((data) => {
+                setImageUrl(data?.success?.image_1);
+                setInitialValues({ id: id, image: data?.success?.image_1, name: data?.success?.name, game_type_id: data?.success?.game_type_id?.id, location_id: data?.success?.location_id?.id, location_address: data?.success?.location_address, level: data?.success?.level, surrounding: data?.success?.surrounding, per_day_price: data?.success?.per_day_price, available_day_from: data?.success?.available_day_from, available_day_to: data?.success?.available_day_to, description: data?.success?.description, ground_admin_id: storedToken });
+            });
+
         }
 
-    }, [])
+    }, [id])
 
     /**
      * file validation
@@ -48,14 +58,14 @@ const AdminGameTypeCreate = () => {
     });
 
     return (<>
-        <GroundAdminHeader />
+        <AdminHeader />
         <Head>
             <title>Ground Create</title>
         </Head>
         <div className="flex flex-row">
             <div className="hidden md:basis-[300px] md:block">
                 <aside>
-                    <GroundAdminAside />
+                <AdminAside />
                 </aside>
             </div>
 
@@ -88,7 +98,7 @@ const AdminGameTypeCreate = () => {
                                         formData.append('available_day_to', values.available_day_to);
                                         formData.append('description', values.description);
 
-                                        CreateGround(values);
+                                        UpdateGround(values);
                                         setTimeout(() => {
                                             setSubmitting(false);
                                             router.push('/ground-admin/ground'); //
@@ -244,6 +254,7 @@ const AdminGameTypeCreate = () => {
                                                 <label className="label">
                                                     <span className="label-text">Ground Image</span>
                                                 </label>
+                                                <div className="grid lg:grid-cols-2 gap-4">
                                                 <input
                                                         type="file"
                                                         className="file-input file-input-bordered file-input-warning w-full max-w-xs" name="image"
@@ -252,11 +263,13 @@ const AdminGameTypeCreate = () => {
                                                             setFile(selectedFile);
                                                             setFieldValue('image', selectedFile);
                                                         }} />
+                                                <img src={imageUrl} alt={imageUrl} width="100px" height="100px"/>
+                                                </div>
                                                 {errors.image && <div style={{ color: 'red' }}>{errors.image}</div>}
                                             </div>
-                                            <div className="form-control mt-6">
-                                                <button className="btn btn-warning" disabled={isSubmitting}>Create</button>
-                                            </div>
+                                            {/* <div className="form-control mt-6">
+                                                <button className="btn btn-warning" disabled={isSubmitting}>Update</button>
+                                            </div> */}
                                         </form>
                                     )}
                                 </Formik>
@@ -273,8 +286,8 @@ const AdminGameTypeCreate = () => {
                 </div>
             </div>
         </div>
-        <GroundAdminFooter />
+        <AdminFooter />
     </>);
 };
 
-export default AdminGameTypeCreate;
+export default AdminGameTypeEdit;

@@ -110,8 +110,8 @@ export const DeleteUsers = async (id: any) => {
 /**
  * Ground
  */
-export const GetAllGround = async () => {
-  const response = await axiosInstance.get('/grounds');
+export const GetAllGround = async (user_id: string) => {
+  const response = await axiosInstance.get('/grounds?user_id='+user_id);
   return response.data;
 };
 
@@ -123,13 +123,21 @@ export const GetByIdGround = async (id: any) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const CreateGround = async (payload: any) => {
-  const response = await axiosInstance.post('/grounds', payload);
+  const response = await axiosInstance.post('/grounds', payload, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return response.data;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const UpdateGround = async (payload: any) => {
-  const response = await axiosInstance.patch('/grounds', payload);
+  const response = await axiosInstance.post('/ground-update', payload, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return response.data;
 };
 
@@ -138,3 +146,4 @@ export const DeleteGround = async (id: any) => {
   const response = await axiosInstance.delete('/grounds/'+id);
   return response.data;
 };
+
