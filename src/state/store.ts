@@ -4,6 +4,8 @@ import locationReducer from './slices/LocationReducer';
 import adminReducer from './slices/AdminReducer';
 import groundReducer from './slices/GroundReducer';
 import availabilityReducer from './slices/AvailabilityReducer';
+import BookingReducer from './slices/BookingReducer';
+import MessagesReducer from './slices/MessagesReducer';
 
 
 export const store = configureStore({
@@ -12,7 +14,9 @@ export const store = configureStore({
         location: locationReducer,
         admin: adminReducer,
         ground: groundReducer,
-        availability: availabilityReducer
+        availability: availabilityReducer,
+        booking: BookingReducer,
+        messages: MessagesReducer
     }
 });
 

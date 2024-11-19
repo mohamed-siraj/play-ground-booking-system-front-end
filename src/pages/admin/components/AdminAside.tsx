@@ -11,6 +11,7 @@ const AdminAside = () => {
                 <Link href="/admin/bookings">Bookings</Link>
             </li>
             <li><Link href="/admin/ground">Grounds</Link></li>
+            <li><Link href="/admin/messages">Messages</Link></li>
             <li>
                 <details open>
                     <summary>Ground Admin</summary>

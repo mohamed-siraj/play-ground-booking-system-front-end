@@ -1,32 +1,34 @@
 'use client';
 
 import Head from "next/head";
-import AdminAside from "../components/AdminAside";
-import AdminFooter from "../components/AdminFooter";
-import AdminHeader from "../components/AdminHeader";
 import { useEffect } from 'react';
 import Booking from "@/components/booking/Booking";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { setBooking } from "@/state/slices/BookingReducer";
 import { GetAllBooking } from "@/axios/useApi";
+import GroundAdminHeader from "../components/GroundAdminHeader";
+import GroundAdminAside from "../components/GroundAdminAside";
+import GroundAdminFooter from "../components/GroundAdminFooter";
 
 const AdminBooking = () => {
     const dispatch = useDispatch();
     const { data } = useSelector((state: RootState) => state.booking);
 
     useEffect(() => {
-        GetAllBooking('', '').then((data) => dispatch(setBooking(data.success)));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const user_id: any = localStorage.getItem('user_id');
+        GetAllBooking(user_id, '').then((data) => dispatch(setBooking(data.success)));
     },[dispatch])
     return (<>
-        <AdminHeader />
+        <GroundAdminHeader />
         <Head>
             <title>Admin Bookings</title>
         </Head>
         <div className="flex flex-row">
             <div className="hidden md:basis-[300px] md:block">
                 <aside>
-                    <AdminAside />
+                <GroundAdminAside />
                 </aside>
             </div>
 
@@ -47,7 +49,7 @@ const AdminBooking = () => {
                 </div>
             </div>
         </div>
-        <AdminFooter />
+        <GroundAdminFooter />
     </>);
 };
 

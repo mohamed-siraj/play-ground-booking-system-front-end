@@ -1,11 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-import AdminAside from './GroundAdminAside';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import CustomersAdminAside from './CustomersAdminAside';
 
-const GroundAdminHeader = () => {
+const CustomersAdminHeader = () => {
 
     const [name, setName] = useState(null);
 
@@ -39,7 +39,7 @@ const GroundAdminHeader = () => {
         <header>
             <div className="navbar bg-base-300">
                 <div className="flex-1">
-                    <Link href="/ground-admin" className="btn btn-ghost text-xl">Ground Admin Dashboard</Link>
+                    <Link href="/customers" className="btn btn-ghost text-xl">Customer Dashboard</Link>
                 </div>
                 <div className="flex-none">
                     <label className="visible md:invisible lg:invisible xl:invisible btn btn-circle swap swap-rotate">
@@ -72,7 +72,7 @@ const GroundAdminHeader = () => {
                             <details>
                                 <summary>{name ? name : 'Guest Account'}</summary>
                                 <ul className="bg-base-100 rounded-t-none p-2">
-                                    <li><Link href="/ground-admin">Home Screen</Link></li>
+                                    <li><Link href="/customers">Home Screen</Link></li>
                                     <li><a onClick={() => {
                                         localStorage.clear();
                                         router.push('/'); //
@@ -90,11 +90,11 @@ const GroundAdminHeader = () => {
                     className={`fixed w-64 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'
                         }`}
                 >
-                    <AdminAside />
+                    <CustomersAdminAside />
                 </div>
             </div>
         </header>
 
     </>)
 }
-export default GroundAdminHeader;
+export default CustomersAdminHeader;

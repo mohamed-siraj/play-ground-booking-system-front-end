@@ -195,7 +195,7 @@ const AdminGameTypeCreate = () => {
                                             </div>
                                             <div className="form-control">
                                                 <label className="label">
-                                                    <span className="label-text">Available Fay From</span>
+                                                    <span className="label-text">Available Day From</span>
                                                 </label>
                                                 <label className="input input-bordered flex items-center gap-2">
                                                     <input name="available_day_from" type="date" className="grow" placeholder="Available Day From" onChange={handleChange}
@@ -207,7 +207,7 @@ const AdminGameTypeCreate = () => {
 
                                             <div className="form-control">
                                                 <label className="label">
-                                                    <span className="label-text">Available Fay To</span>
+                                                    <span className="label-text">Available Day To</span>
                                                 </label>
                                                 <label className="input input-bordered flex items-center gap-2">
                                                     <input name="available_day_to" type="date" className="grow" placeholder="Available Day To" onChange={handleChange}

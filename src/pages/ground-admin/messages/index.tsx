@@ -1,32 +1,32 @@
 'use client';
 
 import Head from "next/head";
-import AdminAside from "../components/AdminAside";
-import AdminFooter from "../components/AdminFooter";
-import AdminHeader from "../components/AdminHeader";
 import { useEffect } from 'react';
-import Booking from "@/components/booking/Booking";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
-import { setBooking } from "@/state/slices/BookingReducer";
-import { GetAllBooking } from "@/axios/useApi";
+import { GetAllMessage } from "@/axios/useApi";
+import { setMessages } from "@/state/slices/MessagesReducer";
+import MessagesList from "@/components/messages/Message";
+import GroundAdminFooter from "../components/GroundAdminFooter";
+import GroundAdminAside from "../components/GroundAdminAside";
+import GroundAdminHeader from "../components/GroundAdminHeader";
 
-const AdminBooking = () => {
+const AdminMessage = () => {
     const dispatch = useDispatch();
-    const { data } = useSelector((state: RootState) => state.booking);
+    const { data } = useSelector((state: RootState) => state.messages);
 
     useEffect(() => {
-        GetAllBooking('', '').then((data) => dispatch(setBooking(data.success)));
+        GetAllMessage('').then((data) => dispatch(setMessages(data.success)));
     },[dispatch])
     return (<>
-        <AdminHeader />
+         <GroundAdminHeader />
         <Head>
-            <title>Admin Bookings</title>
+            <title>Admin Messages</title>
         </Head>
         <div className="flex flex-row">
             <div className="hidden md:basis-[300px] md:block">
                 <aside>
-                    <AdminAside />
+                <GroundAdminAside />
                 </aside>
             </div>
 
@@ -35,7 +35,7 @@ const AdminBooking = () => {
                 <div className="container mx-auto px-4 mt-10">
                     <div className="bg-gray-300 rounded-md">
                         <div className="overflow-x-auto">
-                            <Booking data={data}/>
+                            <MessagesList data={data}/>
                         </div>
                     </div>
                     {/* <div className="grid justify-items-end mt-2">
@@ -47,8 +47,8 @@ const AdminBooking = () => {
                 </div>
             </div>
         </div>
-        <AdminFooter />
+        <GroundAdminFooter />
     </>);
 };
 
-export default AdminBooking;
+export default AdminMessage;

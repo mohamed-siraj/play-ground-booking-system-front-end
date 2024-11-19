@@ -157,3 +157,43 @@ export const availability = async (payload: any)  => {
   const response = await axiosInstance.post('/availability', payload);
   return response.data;
 };
+
+/**
+ * message
+ */
+export const GetAllMessage = async (user_id: string) => {
+  const response = await axiosInstance.get('/message?user_id='+user_id);
+  return response.data;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const GetByIdMessage = async (id: any) => {
+  const response = await axiosInstance.get('/message/'+id);
+  return response.data;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const CreateMessage = async (payload: any) => {
+  const response = await axiosInstance.post('/message', payload);
+  return response.data;
+};
+
+/**
+ * Booking
+ */
+export const GetAllBooking = async (ground_admin_id: string, customer_id: string) => {
+  const response = await axiosInstance.get(`/booking?ground_admin_id=${ground_admin_id}&customer_id=${customer_id}`);
+  return response.data;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const GetByIdBooking = async (id: any) => {
+  const response = await axiosInstance.get('/booking/'+id);
+  return response.data;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const CreateBooking = async (payload: any) => {
+  const response = await axiosInstance.post('/booking', payload);
+  return response.data;
+};

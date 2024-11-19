@@ -4,7 +4,7 @@ const GroundAdminAside = () => {
     return (<>
         <ul className="menu bg-[#214157] text-white h-screen text-lg">
             <li>
-                <a>Bookings</a>
+                <Link href="/ground-admin/bookings">Bookings</Link>
             </li>
             <li>
                 <details open>
@@ -15,6 +15,7 @@ const GroundAdminAside = () => {
                     </ul>
                 </details>
             </li>
+            <li><Link href="/ground-admin/messages">Messages</Link></li>
         </ul>
     </>);
 };

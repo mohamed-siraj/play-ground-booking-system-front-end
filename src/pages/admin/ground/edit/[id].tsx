@@ -6,10 +6,10 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useRouter } from 'next/router';
 import { GetAllGameType, GetAllLocation, GetByIdGround, UpdateGround } from "@/axios/useApi";
-import GroundAdminHeader from "../../components/GroundAdminHeader";
-import GroundAdminAside from "../../components/GroundAdminAside";
-import GroundAdminFooter from "../../components/GroundAdminFooter";
 import { useEffect, useState } from "react";
+import AdminFooter from "../../components/AdminFooter";
+import AdminAside from "../../components/AdminAside";
+import AdminHeader from "../../components/AdminHeader";
 const AdminGameTypeEdit = () => {
     const router = useRouter();
 
@@ -58,14 +58,14 @@ const AdminGameTypeEdit = () => {
     });
 
     return (<>
-        <GroundAdminHeader />
+        <AdminHeader />
         <Head>
             <title>Ground Create</title>
         </Head>
         <div className="flex flex-row">
             <div className="hidden md:basis-[300px] md:block">
                 <aside>
-                    <GroundAdminAside />
+                <AdminAside />
                 </aside>
             </div>
 
@@ -267,9 +267,9 @@ const AdminGameTypeEdit = () => {
                                                 </div>
                                                 {errors.image && <div style={{ color: 'red' }}>{errors.image}</div>}
                                             </div>
-                                            <div className="form-control mt-6">
+                                            {/* <div className="form-control mt-6">
                                                 <button className="btn btn-warning" disabled={isSubmitting}>Update</button>
-                                            </div>
+                                            </div> */}
                                         </form>
                                     )}
                                 </Formik>
@@ -286,7 +286,7 @@ const AdminGameTypeEdit = () => {
                 </div>
             </div>
         </div>
-        <GroundAdminFooter />
+        <AdminFooter />
     </>);
 };
 

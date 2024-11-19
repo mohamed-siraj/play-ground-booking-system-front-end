@@ -54,9 +54,12 @@ const Header = () => {
                                             if (type === 'GROUND_ADMIN') {
                                                 router.push('/ground-admin'); //
                                             }
+                                            if (type === 'CUSTOMER') {
+                                                router.push('/customers'); //
+                                            }
                                         }}>Dashboard</a></li><li><a onClick={() => {
                                             localStorage.clear();
-                                            router.push('/'); //
+                                            window.location.reload(); //
                                         }}>Logout</a></li></> : <li><Link href="/login">Log-in</Link></li>
                                     }
 
