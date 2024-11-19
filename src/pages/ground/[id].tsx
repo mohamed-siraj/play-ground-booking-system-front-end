@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { getDatesFromCheckInCheckOut } from '@/util/common';
+import Link from 'next/link';
 export default function GroundDetails() {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -105,6 +106,8 @@ export default function GroundDetails() {
           <br></br>
           <p><span className='font-bold'>Available Date:</span> {initialValues?.available_day_from} - {initialValues?.available_day_to}</p>
           <p><span className='font-bold'>Location:</span> {initialValues?.location_id?.name}</p>
+          <br></br>
+          <p><span className='font-bold'>Google Map :  </span> <Link target='blank' href={initialValues?.location_address}>Click Here</Link> </p>
           <br></br>
           <p>
             {initialValues?.description}
